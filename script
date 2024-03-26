@@ -1,0 +1,16 @@
+local MessagingService = game:GetService("MessagingService")
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+	player.Chatted:Connect(function(message, recipient)
+		if player.UserId == (id here) and message:lower():find("/update") then
+			MessagingService:PublishAsync("Shutdown", true)
+		end
+	end)
+end)
+MessagingService:SubscribeAsync("Shutdown", function()
+	print("Shutdown called")
+	for i,v in pairs(Players:GetPlayers()) do 
+		v:Kick("Developer updated game :D")
+	end
+end)
